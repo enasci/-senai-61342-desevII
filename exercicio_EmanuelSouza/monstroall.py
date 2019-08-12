@@ -111,5 +111,5 @@ if (mon4.tposition == 2):
     if (mon1.tposition == 2):
         Torneio.duelo(mon1,mon4)
 
-
+# 1 contra 1
 
