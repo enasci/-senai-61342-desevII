@@ -1,0 +1,46 @@
+countlau = 0
+countyou = 0
+countpur = 0
+countrai = 0
+
+musica = {"Purple" : 0,
+          "Rain"   : 0,
+          "You"    : 0,
+          "Laugh"  : 0}
+arquivo = open('josias.txt', 'r')
+arquivo.readline()
+
+for linha in arquivo:
+    li = linha.split(" ")
+    for i in li :
+        pur = i.find('Purple')
+        pur2 = i.find('purple')
+
+        if pur != -1 or pur2 != -1:
+            countpur +=1
+
+        rain = i.find('rain')
+        rain2 = i.find('Rain')
+        if rain != -1 or rain2 != -1:
+            countrai +=1
+
+        you =i.find('you')
+        you2 = i.find('you \n')
+        if you != -1 or you2 != -1:
+            countyou +=1
+
+        lau = i.find('laughing')
+        laucaps = i.find('Laughing')
+
+        if lau != -1 or laucaps != -1:
+            countlau +=1
+        
+
+
+musica["Purple"] = countpur
+musica["Rain"] = countrai
+musica["You"] = countyou
+musica["Laugh"] = countlau
+
+print(musica)
+arquivo.close()
