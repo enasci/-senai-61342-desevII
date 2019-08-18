@@ -1,4 +1,5 @@
 from random import randint
+import json
 count_monster = 0
 class Monstros :
     semif = []
@@ -36,18 +37,22 @@ class Status :
         if tr1.element_type == 'fire' :
             tr1.level += 1
             tr1.pow_attack += 30
+            tr1.pow_defense += 10
             tr1.hp  += 270
         if tr1.element_type == 'water' :
             tr1.level += 1
             tr1.pow_attack += 50
+            tr1.pow_defense += 7
             tr1.hp  += 120
         if tr1.element_type == 'wind' :
             tr1.level += 1
             tr1.pow_attack += 40
+            tr1.pow_defense += 10
             tr1.hp  += 230
         if tr1.element_type == 'earth' :
             tr1.level += 1
             tr1.pow_attack += 10
+            tr1.pow_defense += 20
             tr1.hp  += 400        
 
 
@@ -109,24 +114,51 @@ class Torneio :
                 Monstros.quartas.append(tr2)
                 Status.lvlup(tr2) 
             
-            
-mon1 = Monstros( "Wildwind", "wind", 20, 5 , 3890 , 2 , 1 )
-mon2 = Monstros( "Splash", "water", 18, 5 , 4890 , 2 , 1 )
-mon3 = Monstros( "Igni", "fire", 15, 5 , 5890 , 2 , 1 )
-mon4 = Monstros( "Rock", "earth", 10, 5 , 34890 , 2 , 1 )
-mon5 = Monstros( "Bird", "wind", 20, 5 , 2890 , 2 , 1 )
-mon6 = Monstros( "Garu", "water", 18, 5 , 3890 , 2 , 1 )
-mon7 = Monstros( "Firin", "fire", 15, 5 , 4890 , 2 , 1 )
-mon8 = Monstros( "Mountain", "earth", 10, 5 ,5890 , 2 , 1 )
-mon9 = Monstros( "Rexar", "wind", 20, 5 , 7890 , 2 , 1 )
-mon10 = Monstros( "Wrynn", "water", 18, 5 , 8890 , 2 , 1 )
-mon11 = Monstros( "Aegwynn", "fire", 15, 5 , 7890 , 2 , 1 )
-mon12 = Monstros( "Elune", "earth", 10, 5 , 6890 , 2 , 1 )
-mon13 = Monstros( "Illidan", "wind", 20, 5 , 5890 , 2 , 1 )
-mon14 = Monstros( "Malfurion", "water", 18, 5 , 4890 , 2 , 1 )
-mon15 = Monstros( "Ragnaros", "fire", 15, 5 , 3890 , 2 , 1 )
-mon16 = Monstros( "Azralon", "earth", 10, 5 , 4890 , 2 , 1 )
+json_input = '{ "monstros": [ { "name": "Wildwind","element_type": "wind","pow_attack": "20","pow_defense": "5","hp": "890","evo":"2","level": "1"},{"name": "Splash","element_type": "water","pow_attack": "18","pow_defense": "5","hp": "890","evo": "2","level": "1"},{ "name": "Igni","element_type": "fogo","pow_attack": "7","pow_defense": "5","hp": "890","evo": "2","level": "1"},{"name": "Rock","element_type": "terra","pow_attack": "7","pow_defense": "5","hp": "2890","evo": "2","level": "1"},{"name": "Bird","element_type": "water","pow_attack": "18","pow_defense": "5","hp": "2890","evo": "2","level": "1"},{ "name": "Garu","element_type": "fogo","pow_attack": "7","pow_defense": "5","hp": "890","evo": "2","level": "1"},{"name": "Firin","element_type": "terra","pow_attack": "7","pow_defense": "5","hp": "890","evo": "2","level": "1"},{"name": "Mountain","element_type": "water","pow_attack": "18","pow_defense": "5","hp": "890","evo": "2","level": "1"},{ "name": "Rexar","element_type": "fogo","pow_attack": "7","pow_defense": "5","hp": "890","evo": "2","level": "1"},{"name": "Wrynn","element_type": "terra","pow_attack": "7","pow_defense": "5","hp": "890","evo": "2","level": "1"},{"name": "Aegwynn","element_type": "water","pow_attack": "18","pow_defense": "5","hp": "890","evo": "2","level": "1"},{ "name": "Elune","element_type": "fogo","pow_attack": "7","pow_defense": "5","hp": "890","evo": "2","level": "1"},{"name": "Illidan","element_type": "terra","pow_attack": "7","pow_defense": "5","hp": "890","evo": "2","level": "1"},{"name": "Malfurion","element_type": "water","pow_attack": "18","pow_defense": "5","hp": "890","evo": "2","level": "1"},{ "name": "Ragnaros","element_type": "fogo","pow_attack": "7","pow_defense": "5","hp": "890","evo": "2","level": "1"},{"name": "Azralon","element_type": "terra","pow_attack": "7","pow_defense": "5","hp": "890","evo": "2","level": "1"}]}'
+
+
+json_decode = json.loads(json_input)
+
+m_name=[]
+m_element_type=[]
+m_pow_attack=[]
+m_pow_defense=[]
+m_hp=[]
+m_evo=[]
+m_level=[]
+
+
+for x in json_decode['monstros']:
+        m_name.append(x['name'])
+        m_element_type.append(x['element_type'])
+        m_pow_attack.append(int(x['pow_attack']))
+        m_pow_defense.append(int(x['pow_defense']))
+        m_hp.append(int(x['hp']))
+        m_evo.append(int(x['evo']))
+        m_level.append(int(x['level']))
+ 
+data_json=[m_name, m_element_type, m_pow_attack, m_pow_defense, m_hp, m_evo, m_level]
+
+ 
+mon1 = Monstros(data_json[0][0], data_json[1][0], data_json[2][0], data_json[3][0] , data_json[4][0] , data_json[5][0] , data_json[6][0])
+mon2 = Monstros(data_json[0][1], data_json[1][1], data_json[2][1], data_json[3][1] , data_json[4][1] , data_json[5][1] , data_json[6][1])
+mon3 = Monstros(data_json[0][2], data_json[1][2], data_json[2][2], data_json[3][2] , data_json[4][2] , data_json[5][2] , data_json[6][2])
+mon4 = Monstros(data_json[0][3], data_json[1][3], data_json[2][3], data_json[3][3] , data_json[4][3] , data_json[5][3] , data_json[6][3])            
+mon5 = Monstros(data_json[0][4], data_json[1][4], data_json[2][4], data_json[3][4] , data_json[4][4] , data_json[5][4] , data_json[6][4])
+mon6 = Monstros(data_json[0][5], data_json[1][5], data_json[2][5], data_json[3][5] , data_json[4][5] , data_json[5][5] , data_json[6][5])
+mon7 = Monstros(data_json[0][6], data_json[1][6], data_json[2][6], data_json[3][6] , data_json[4][6] , data_json[5][6] , data_json[6][6])
+mon8 = Monstros(data_json[0][7], data_json[1][7], data_json[2][7], data_json[3][7] , data_json[4][7] , data_json[5][7] , data_json[6][7])
+mon9 = Monstros(data_json[0][8], data_json[1][8], data_json[2][8], data_json[3][8] , data_json[4][8] , data_json[5][8] , data_json[6][8])
+mon10 = Monstros(data_json[0][9], data_json[1][9], data_json[2][9], data_json[3][9] , data_json[4][9] , data_json[5][9] , data_json[6][9])
+mon11 = Monstros(data_json[0][10], data_json[1][10], data_json[2][10], data_json[3][10] , data_json[4][10] , data_json[5][10] , data_json[6][10])
+mon12 = Monstros(data_json[0][11], data_json[1][11], data_json[2][11], data_json[3][11] , data_json[4][11] , data_json[5][11] , data_json[6][11])
+mon13 = Monstros(data_json[0][12], data_json[1][12], data_json[2][12], data_json[3][12] , data_json[4][12] , data_json[5][12] , data_json[6][11])
+mon14 = Monstros(data_json[0][13], data_json[1][13], data_json[2][13], data_json[3][13] , data_json[4][13] , data_json[5][13] , data_json[6][13])
+mon15 = Monstros(data_json[0][14], data_json[1][14], data_json[2][14], data_json[3][14] , data_json[4][14] , data_json[5][14] , data_json[6][14])
+mon16 = Monstros(data_json[0][15], data_json[1][15], data_json[2][15], data_json[3][15] , data_json[4][15] , data_json[5][15] , data_json[6][15])
+
 part = [ mon1, mon2, mon3, mon4, mon5, mon6, mon7, mon8, mon9, mon10, mon11, mon12, mon13, mon14, mon15, mon16 ]
+
 
 Status.combat( part[0], part[1] )
 Status.combat( part[2], part[3] )
