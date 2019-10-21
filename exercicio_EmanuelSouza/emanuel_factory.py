@@ -46,8 +46,8 @@ class Placar:
 
 
 
-pontuando = Call.class_name("Placar")
-pontuando2 = Call.class_name("Placar")
+pontuando = Call.class_name("Placar").instance()
+pontuando2 = Call.class_name("Placar").instance()
 
 pontuando.adicionar_placar("emanuel",10,"estrela")
 pontuando.adicionar_placar("venha",8,"up")
@@ -59,6 +59,9 @@ pontuando.print_placar()
 
 print("------------------------------------")
 pontuando2.print_placar()
+
+print(pontuando)
+print(pontuando2)
 
 
 
